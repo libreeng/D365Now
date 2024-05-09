@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+    <Default Extension="xml" ContentType="application/octet-stream" />
+    <Default Extension="xaml" ContentType="application/octet-stream" />
+    <Default Extension="nupkg" ContentType="application/octet-stream" />
+    <Override PartName="/WebResources/new_OnsightNowApiB4063D5E-9601-EF11-9F89-002248B31AA4"
+        ContentType="application/octet-stream" />
+    <Override PartName="/WebResources/new_onsightIcon3B2EFE42-E975-EB11-A812-000D3AF3FF5E"
+        ContentType="application/octet-stream" />
+</Types>

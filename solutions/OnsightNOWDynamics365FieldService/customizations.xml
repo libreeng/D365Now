@@ -1,0 +1,217 @@
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Entities>
+    <Entity>
+      <Name LocalizedName="Work Order" OriginalName="Work Order">msdyn_workorder</Name>
+      <EntityInfo>
+        <entity Name="msdyn_workorder">
+          <LocalizedNames>
+            <LocalizedName description="Work Order" languagecode="1033" />
+          </LocalizedNames>
+          <LocalizedCollectionNames>
+            <LocalizedCollectionName description="Work Orders" languagecode="1033" />
+          </LocalizedCollectionNames>
+          <Descriptions>
+            <Description description="Work orders store all information about the job performed for an account. Stores incident details, resource, expenses, tasks, communications, billing and more" languagecode="1033" />
+          </Descriptions>
+          <attributes />
+          <EntitySetName>msdyn_workorders</EntitySetName>
+          <IsDuplicateCheckSupported>1</IsDuplicateCheckSupported>
+          <IsBusinessProcessEnabled>1</IsBusinessProcessEnabled>
+          <IsRequiredOffline>0</IsRequiredOffline>
+          <IsInteractionCentricEnabled>0</IsInteractionCentricEnabled>
+          <IsCollaboration>1</IsCollaboration>
+          <AutoRouteToOwnerQueue>0</AutoRouteToOwnerQueue>
+          <IsConnectionsEnabled>1</IsConnectionsEnabled>
+          <EntityColor>#660033</EntityColor>
+          <IsDocumentManagementEnabled>1</IsDocumentManagementEnabled>
+          <AutoCreateAccessTeams>0</AutoCreateAccessTeams>
+          <IsOneNoteIntegrationEnabled>0</IsOneNoteIntegrationEnabled>
+          <IsKnowledgeManagementEnabled>0</IsKnowledgeManagementEnabled>
+          <IsSLAEnabled>0</IsSLAEnabled>
+          <IsDocumentRecommendationsEnabled>0</IsDocumentRecommendationsEnabled>
+          <IsBPFEntity>0</IsBPFEntity>
+          <OwnershipTypeMask>UserOwned</OwnershipTypeMask>
+          <EntityMask>ActivityPointer</EntityMask>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsRetrieveAuditEnabled>0</IsRetrieveAuditEnabled>
+          <IsRetrieveMultipleAuditEnabled>0</IsRetrieveMultipleAuditEnabled>
+          <IsActivity>0</IsActivity>
+          <ActivityTypeMask>CommunicationActivity</ActivityTypeMask>
+          <IsActivityParty>0</IsActivityParty>
+          <IsReplicated>0</IsReplicated>
+          <IsReplicationUserFiltered>0</IsReplicationUserFiltered>
+          <IsMailMergeEnabled>1</IsMailMergeEnabled>
+          <IsVisibleInMobile>0</IsVisibleInMobile>
+          <IsVisibleInMobileClient>1</IsVisibleInMobileClient>
+          <IsReadOnlyInMobileClient>0</IsReadOnlyInMobileClient>
+          <IsOfflineInMobileClient>1</IsOfflineInMobileClient>
+          <DaysSinceRecordLastModified>0</DaysSinceRecordLastModified>
+          <MobileOfflineFilters>&lt;fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false"&gt;&lt;entity name="msdyn_workorder"&gt;&lt;/entity&gt;&lt;/fetch&gt;</MobileOfflineFilters>
+          <IsMapiGridEnabled>1</IsMapiGridEnabled>
+          <IsReadingPaneEnabled>0</IsReadingPaneEnabled>
+          <IsQuickCreateEnabled>1</IsQuickCreateEnabled>
+          <SyncToExternalSearchIndex>0</SyncToExternalSearchIndex>
+          <IntroducedVersion>3.1.0.3</IntroducedVersion>
+          <IconMediumName>msdyn_/Icons/Entity/WorkOrder_32/_imgs/NavBar/Invisible.gif</IconMediumName>
+          <IconSmallName>msdyn_/Icons/Entity/WorkOrder_16.png</IconSmallName>
+          <IconVectorName>msdyn_/Icons/SVG/WorkOrders.svg</IconVectorName>
+          <EnforceStateTransitions>0</EnforceStateTransitions>
+          <EntityHelpUrlEnabled>1</EntityHelpUrlEnabled>
+          <EntityHelpUrl>http://go.microsoft.com/fwlink/?LinkId=773453</EntityHelpUrl>
+          <ChangeTrackingEnabled>1</ChangeTrackingEnabled>
+          <IsEnabledForExternalChannels>0</IsEnabledForExternalChannels>
+          <IsMSTeamsIntegrationEnabled>0</IsMSTeamsIntegrationEnabled>
+          <IsSolutionAware>0</IsSolutionAware>
+          <HasRelatedNotes>True</HasRelatedNotes>
+          <HasRelatedActivities>True</HasRelatedActivities>
+        </entity>
+      </EntityInfo>
+      <RibbonDiffXml>
+        <CustomActions>
+          <CustomAction Id="new.msdyn_workorder.Button25.OnsightNowButton.CustomAction" Location="Mscrm.Form.msdyn_workorder.MainTab.Save.Controls._children" Sequence="31">
+            <CommandUIDefinition>
+              <FlyoutAnchor Command="Mscrm.Enabled" Id="new.msdyn_workorder.Button25.OnsightNowButton" LabelText="$LocLabels:new.msdyn_workorder.Button25.OnsightNowButton.LabelText" Sequence="31" TemplateAlias="o1" ModernImage="$webresource:new_onsightIcon">
+                <Menu Id="new.msdyn_workorder.Button25.OnsightNowButton.Menu">
+                  <MenuSection Id="new.msdyn_workorder.Section26.Section" Sequence="55" DisplayMode="Menu16">
+                    <Controls Id="new.msdyn_workorder.Section26.Section.Controls">
+                      <Button Command="new.msdyn_workorder.InviteFieldTech" Id="new.msdyn_workorder.Button27.InviteFieldTechButton" LabelText="$LocLabels:new.msdyn_workorder.Button27.InviteFieldTechButton.LabelText" Sequence="10" ModernImage="$webresource:new_onsightIcon" />
+                      <Button Command="new.msdyn_workorder.InviteRemoteExpert" Id="new.msdyn_workorder.Button28.InviteExpertButton" LabelText="$LocLabels:new.msdyn_workorder.Button28.InviteExpertButton.LabelText" Sequence="15" ModernImage="$webresource:new_onsightIcon" />
+                    </Controls>
+                  </MenuSection>
+                </Menu>
+              </FlyoutAnchor>
+            </CommandUIDefinition>
+          </CustomAction>
+        </CustomActions>
+        <Templates>
+          <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
+        </Templates>
+        <CommandDefinitions>
+          <CommandDefinition Id="new.msdyn_workorder.InviteFieldTech">
+            <EnableRules />
+            <DisplayRules />
+            <Actions>
+              <JavaScriptFunction FunctionName="onClick" Library="$webresource:new_OnsightNowApi">
+                <CrmParameter Value="PrimaryControl" />
+                <StringParameter Value="fieldtech" />
+              </JavaScriptFunction>
+            </Actions>
+          </CommandDefinition>
+          <CommandDefinition Id="new.msdyn_workorder.InviteRemoteExpert">
+            <EnableRules />
+            <DisplayRules />
+            <Actions>
+              <JavaScriptFunction FunctionName="onClick" Library="$webresource:new_OnsightNowApi">
+                <CrmParameter Value="PrimaryControl" />
+                <StringParameter Value="expert" />
+              </JavaScriptFunction>
+            </Actions>
+          </CommandDefinition>
+        </CommandDefinitions>
+        <RuleDefinitions>
+          <TabDisplayRules />
+          <DisplayRules>
+            <DisplayRule Id="new.msdyn_workorder.DisplayRule0.DisplayRule">
+              <ValueRule Value="" InvertResult="true" />
+            </DisplayRule>
+          </DisplayRules>
+          <EnableRules>
+            <EnableRule Id="Mscrm.Enabled">
+              <CustomRule FunctionName="XrmCore.Rules.Enabled.alwaysEnabled" Library="$webresource:Main_system_library.js" />
+            </EnableRule>
+          </EnableRules>
+        </RuleDefinitions>
+        <LocLabels>
+          <LocLabel Id="new.msdyn_workorder.Button25.OnsightNowButton.LabelText">
+            <Titles>
+              <Title description="Onsight NOW" languagecode="1033" />
+            </Titles>
+          </LocLabel>
+          <LocLabel Id="new.msdyn_workorder.Button27.InviteFieldTechButton.LabelText">
+            <Titles>
+              <Title description="Invite Field Tech" languagecode="1033" />
+            </Titles>
+          </LocLabel>
+          <LocLabel Id="new.msdyn_workorder.Button28.InviteExpertButton.LabelText">
+            <Titles>
+              <Title description="Invite Subject Matter Expert" languagecode="1033" />
+            </Titles>
+          </LocLabel>
+        </LocLabels>
+      </RibbonDiffXml>
+    </Entity>
+  </Entities>
+  <Roles></Roles>
+  <Workflows>
+    <Workflow WorkflowId="{fa6384b4-508a-4c15-bde8-58230abb2c1e}" Name="ScheduleNOWMeeting">
+      <XamlFileName>/Workflows/ScheduleNOWMeeting-FA6384B4-508A-4C15-BDE8-58230ABB2C1E.xaml</XamlFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>3</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>1</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <CreateStage>40</CreateStage>
+      <RunAs>1</RunAs>
+      <SdkMessageId>{3a4fcadd-f506-ef11-9f8a-002248b31aa4}</SdkMessageId>
+      <UniqueName>ScheduleNOWMeeting</UniqueName>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <FormId>{00000000-0000-0000-0000-000000000000}</FormId>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="ScheduleNOWMeeting" />
+      </LocalizedNames>
+    </Workflow>
+  </Workflows>
+  <FieldSecurityProfiles></FieldSecurityProfiles>
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <WebResources>
+    <WebResource>
+      <WebResourceId>{b4063d5e-9601-ef11-9f89-002248b31aa4}</WebResourceId>
+      <Name>new_OnsightNowApi</Name>
+      <DisplayName>Onsight NOW API</DisplayName>
+      <LanguageCode>1033</LanguageCode>
+      <WebResourceType>3</WebResourceType>
+      <IntroducedVersion>1.0.0</IntroducedVersion>
+      <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+      <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+      <DependencyXml>&lt;Dependencies&gt;&lt;Dependency componentType="WebResource"/&gt;&lt;/Dependencies&gt;</DependencyXml>
+      <IsCustomizable>1</IsCustomizable>
+      <CanBeDeleted>1</CanBeDeleted>
+      <IsHidden>0</IsHidden>
+      <FileName>/WebResources/new_OnsightNowApiB4063D5E-9601-EF11-9F89-002248B31AA4</FileName>
+    </WebResource>
+    <WebResource>
+      <WebResourceId>{3b2efe42-e975-eb11-a812-000d3af3ff5e}</WebResourceId>
+      <Name>new_onsightIcon</Name>
+      <DisplayName>Onsight icon</DisplayName>
+      <WebResourceType>11</WebResourceType>
+      <IntroducedVersion>1.0.0</IntroducedVersion>
+      <IsEnabledForMobileClient>1</IsEnabledForMobileClient>
+      <IsAvailableForMobileOffline>1</IsAvailableForMobileOffline>
+      <DependencyXml>&lt;Dependencies&gt;&lt;Dependency componentType="WebResource"/&gt;&lt;/Dependencies&gt;</DependencyXml>
+      <IsCustomizable>0</IsCustomizable>
+      <CanBeDeleted>1</CanBeDeleted>
+      <IsHidden>0</IsHidden>
+      <FileName>/WebResources/new_onsightIcon3B2EFE42-E975-EB11-A812-000D3AF3FF5E</FileName>
+    </WebResource>    
+  </WebResources>
+  <CustomControls />
+  <EntityDataProviders />
+  <Languages>
+    <Language>1033</Language>
+  </Languages>
+</ImportExportXml>

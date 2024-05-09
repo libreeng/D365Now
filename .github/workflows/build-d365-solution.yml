@@ -1,0 +1,56 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Build D365 Solution
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+        
+    - name: Navigate to Workspace
+      run: cd $GITHUB_WORKSPACE
+
+    - name: Restore Packages
+      run: nuget restore OnsightNow.DataversePlugin/OnsightNow.DataversePlugin.sln
+
+    - name: Build Solution
+      run: |
+          msbuild.exe OnsightNow.DataversePlugin/OnsightNow.DataversePlugin.sln /p:platform="Any CPU" /p:configuration="Release"
+
+    - name: Delete existing artifacts
+      run: |
+          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue ".\staging"
+          New-Item -Path ".\staging" -ItemType Directory
+
+    - name: Copy solutions to staging area
+      run: xcopy "solutions\OnsightNOWDynamics365FieldService\*" "staging" /E /H
+
+    - name: Copy Plugin package to staging area
+      run:  xcopy ".\OnsightNow.DataversePlugin\bin\Release\OnsightNow.DataversePlugin.1.0.0.nupkg" ".\staging\pluginpackages\new_OnsightNow.DataversePlugin\package\" /Y
+
+    - name: Strip file extensions from web resources (D365 doesn't like them)
+      run: |
+          Get-ChildItem -Filter ".\staging\WebResources\*.js" | Rename-Item -NewName {$_.name -replace ".js","" }
+          Get-ChildItem -Filter ".\staging\WebResources\*.svg" | Rename-Item -NewName {$_.name -replace ".svg","" }
+
+    - uses: actions/upload-artifact@v4
+      with:
+          name: OnsightNOWDynamics365FieldService
+          path: staging/
