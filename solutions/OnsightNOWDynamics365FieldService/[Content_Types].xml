@@ -7,4 +7,6 @@
         ContentType="application/octet-stream" />
     <Override PartName="/WebResources/new_onsightIcon3B2EFE42-E975-EB11-A812-000D3AF3FF5E"
         ContentType="application/octet-stream" />
+    <Override PartName="/WebResources/newOnsightNowIdaChat4FEECDE3-527C-4208-B380-15AF4B24183B"
+        ContentType="application/octet-stream" />
 </Types>

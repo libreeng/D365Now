@@ -21,6 +21,7 @@
     <Authors>Dave Developer</Authors>
     <Company>Librestream Inc</Company>
     <Description>This is a sample nuget package which contains a Dataverse plugin and its runtime dependencies like Newtonsoft.Json</Description>
+    <UserSecretsId>7f9e2d20-904f-4683-99f0-2468b7e281b9</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
