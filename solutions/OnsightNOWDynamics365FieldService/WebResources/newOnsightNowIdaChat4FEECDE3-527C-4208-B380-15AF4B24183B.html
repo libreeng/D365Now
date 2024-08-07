@@ -1,0 +1,602 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <style>
+            body {
+                background-color: #f4f7f6;
+                font-size: 0.85em !important;
+                height: 100%;
+                margin: 0;
+            }
+
+            .card {
+                background: #fff;
+                transition: .5s;
+                border: 0;
+                position: relative;
+                width: 100%;
+                box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+            }
+
+            .chat-app {
+                height: 100%;
+            }
+
+            .chat-app .people-list {
+                width: 280px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                padding: 20px;
+                z-index: 7
+            }
+
+            .chat-app .chat {
+                /*border-left: 1px solid #eaeaea*/
+                height: 100%;
+            }
+
+            .people-list {
+                -moz-transition: .5s;
+                -o-transition: .5s;
+                -webkit-transition: .5s;
+                transition: .5s
+            }
+
+            .people-list .chat-list li {
+                padding: 10px 15px;
+                list-style: none;
+                border-radius: 3px
+            }
+
+            .people-list .chat-list li:hover {
+                background: #efefef;
+                cursor: pointer
+            }
+
+            .people-list .chat-list li.active {
+                background: #efefef
+            }
+
+            .people-list .chat-list li .name {
+                font-size: 15px
+            }
+
+            .people-list .chat-list img {
+                width: 45px;
+                border-radius: 50%
+            }
+
+            .people-list img {
+                float: left;
+                border-radius: 50%
+            }
+
+            .people-list .about {
+                float: left;
+                padding-left: 8px
+            }
+
+            .people-list .status {
+                color: #999;
+                font-size: 13px
+            }
+
+            .chat .chat-header {
+                padding: 6px 16px;
+                border-bottom: 2px solid #f4f7f6;
+                height: 60px;
+            }
+
+            .chat .chat-header img {
+                float: left;
+                border-radius: 40px;
+                width: 40px
+            }
+
+            .chat .chat-header .chat-about {
+                float: left;
+                padding-left: 10px;
+            }
+
+            .chat-header .chat-about h6 {
+                font-size: 1em !important;
+                margin-bottom: 0px;
+            }
+
+            .chat-header .chat-about {
+                font-weight: 400;
+            }
+
+            .chat .chat-history {
+                padding: 12px;
+                border-bottom: 2px solid #fff;
+                height: calc(100% - 128px);
+                overflow: auto;
+            }
+
+            .chat .chat-history ul {
+                padding: 0
+            }
+
+            .chat .chat-history ul li {
+                list-style: none;
+                margin-bottom: 20px
+            }
+
+            .chat .chat-history ul li:last-child {
+                margin-bottom: 0px
+            }
+
+            .chat .chat-history .message-data {
+                margin-bottom: 5px
+            }
+
+            .chat .chat-history .message-data img {
+                border-radius: 40px;
+                width: 40px
+            }
+
+            .chat .chat-history .message-data-time {
+                color: #434651;
+                padding-left: 6px
+            }
+
+            .chat .chat-history .message {
+                color: #444;
+                padding: 6px 12px;
+                font-size: 1em;
+                border-radius: 7px;
+                display: inline-block;
+                position: relative
+            }
+
+            .chat .chat-history .message p {
+                margin-block-end: 0px;
+            }
+
+            .chat .chat-history .message ol li {
+                list-style: unset;
+                margin-bottom: 0px !important;
+            }
+
+            .chat .chat-history .message-data .message-user {
+                font-weight: bold;
+            }
+
+            .chat .chat-history .other-message {
+                background: #efefef
+            }
+
+            .chat .chat-history .reference {
+                background: #efefef
+            }
+
+            .chat .chat-history .my-message {
+                background: rgb(25, 118, 210);
+                color: rgb(255, 255, 255);
+                text-align: right
+            }
+
+            .chat .chat-history .my-message:after {
+                border-bottom-color: #e8f1f3;
+                left: 93%
+            }
+
+            .chat .chat-footer {
+                padding: 8px;
+                height: 60px;
+            }
+
+            .chat .chat-footer input {
+                font-size: 1em;
+            }
+
+            .online,
+            .offline,
+            .me {
+                margin-right: 2px;
+                font-size: 8px;
+                vertical-align: middle
+            }
+
+            .online {
+                color: #86c541
+            }
+
+            .offline {
+                color: #e47297
+            }
+
+            .me {
+                color: #1d8ecd
+            }
+
+            .float-right {
+                float: right
+            }
+
+            .clearfix:after {
+                visibility: hidden;
+                display: block;
+                font-size: 0;
+                content: " ";
+                clear: both;
+                height: 0
+            }
+
+            .send-button {
+                cursor: pointer;
+            }
+
+            .send-button:hover {
+                background-color: #d0d0d0;
+            }
+
+            @media only screen and (max-width: 767px) {
+                .chat-app {
+                    height: 100%;
+                }
+
+                .chat-app .people-list {
+                    height: 465px;
+                    width: 100%;
+                    overflow-x: auto;
+                    background: #fff;
+                    left: -400px;
+                    display: none
+                }
+
+                .chat-app .people-list.open {
+                    left: 0
+                }
+
+                .chat-app .chat {
+                    margin: 0;
+                    height: 100%;
+                }
+
+                .chat-app .chat-history {
+                    height: calc(100% - 120px);
+                    overflow: auto
+                }
+            }
+
+            @media only screen and (min-width: 768px) and (max-width: 992px) {
+                .chat-app .chat-list {
+                    height: 650px;
+                    overflow-x: auto
+                }
+
+                .chat-app .chat-history {
+                    height: calc(100% - 120px);
+                    overflow: auto
+                }
+            }
+
+            @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+                .chat-app .chat-list {
+                    height: 480px;
+                    overflow-x: auto
+                }
+
+                .chat-app .chat-history {
+                    height: calc(100% - 200px);
+                    overflow: auto
+                }
+            }
+
+            .infinity-loader {
+                position: var(--infinity-loader-position);
+                left: var(--infinity-loader-left);
+                top: var(--infinity-loader-top);
+                transform: translate(-50%, -50%);
+                width: calc(2 * var(--infinity-loader-width) - var(--infinity-loader-progress-width));
+                height: var(--infinity-loader-height);
+            }
+
+            .infinity-loader .bg div,
+            .infinity-loader > .fg > div > div {
+                width: var(--infinity-loader-width);
+                height: var(--infinity-loader-height);
+                border: var(--infinity-loader-progress-width) solid #aaa;
+                box-sizing: border-box;
+                border-radius: 50%;
+                border-color: transparent;
+                position: absolute;
+            }
+
+            .infinity-loader .right-bg {
+                transform: translate(100%, 0);
+                left: calc(-1 * var(--infinity-loader-progress-width));
+            }
+
+            .infinity-loader > .fg > div > div {
+                border-color: #49EBEA #49EBEA transparent transparent;
+                transform: rotate(135deg);
+                animation: spin 1s linear infinite;
+                position: static;
+            }
+
+            .infinity-loader > .fg > div {
+                clip: rect(0, var(--infinity-loader-width), calc(var(--infinity-loader-width) / 2), 0);
+                position: absolute;
+            }
+
+            .infinity-loader > .fg > .bottom-right-rect {
+                left: calc(-1 * var(--infinity-loader-progress-width));
+                transform: translateX(100%) scale(1, -1);
+            }
+
+            .infinity-loader > .fg > .bottom-right-rect > div {
+                animation-delay: 0.25s;
+            }
+
+            .infinity-loader > .fg > .top-right-rect {
+                left: calc(-1 * var(--infinity-loader-progress-width));
+                transform: translateX(100%) scale(-1, 1);
+            }
+
+            .infinity-loader > .fg > .top-right-rect > div {
+                animation-delay: 0.5s;
+            }
+
+            .infinity-loader > .fg > .bottom-left-rect {
+                transform: scale(-1);
+            }
+
+            .infinity-loader > .fg > .bottom-left-rect > div {
+                animation-delay: 0.75s;
+            }
+
+            .infinity-loader > .fg {
+                filter: drop-shadow(0 0 6px #49EBEA);
+            }
+
+            @keyframes spin {
+                50%, 100% {
+                    transform: rotate(495deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            // depending on where this script is utilized (e.g. within an HTML web resource),
+            // we may have to obtain the Xrm object from the parent
+            var xrm = typeof(Xrm) !== "undefined" ? Xrm : parent.Xrm;
+            var globalContext = xrm ? xrm.Utility.getGlobalContext() : {};
+            var clientContext = globalContext ? globalContext.client : {};
+
+            // Regex for Xrm.WebApi calls returning an array of entities
+            const WebApiExpandExpr = /(\w+)\(\$select\=(\w+)\)$/;
+
+            let chatState = {
+                variables: [
+                    {
+                        "key": "advancedCitation",
+                        "value": "true"
+                    },
+                    {
+                        "key": "userChat",
+                        "value": "true"
+                    },
+                    {
+                        "key": "useDocument",
+                        "value": "true"
+                    },
+                    {
+                        "key": "useCall",
+                        "value": "true"
+                    },
+                    {
+                        "key": "useImage",
+                        "value": "true"
+                    },
+                    {
+                        "key": "useCollection",
+                        "value": "true"
+                    }
+                ],
+                chatHistory: []
+            };
+
+            function scrollToBottom() {
+                // Scroll to bottom of chat history
+                const chatHistory = $(".chat-history")[0];
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }
+
+            function mdToHtml(markdownText) {
+                const converter = new showdown.Converter({ openLinksInNewWindow: true});
+                return converter.makeHtml(markdownText);
+            }
+
+            function appendUserMessage(msg) {
+                chatState.chatHistory.push(msg);
+                const html = `
+                    <li class="clearfix">
+                        <div class="message-data text-right">
+                            <span class="message-user">Me</span>
+                            <span class="message-data-time">${new Date(msg.timestamp).toLocaleString()}</span>
+                        </div>
+                        <div class="message my-message float-right">${mdToHtml(msg.content)}</div>
+                    </li>`;
+                
+                const list = document.getElementById("chatHistoryList");
+                list.insertAdjacentHTML("beforeend", html);
+                scrollToBottom();
+            }
+
+            function appendIdaResponse(response) {
+                const msg = {
+                    timestamp: new Date().toISOString(),
+                    userName: "Bot",
+                    content: response.value
+                };
+                chatState.chatHistory.push(msg);
+
+                let references = "";
+                if (response.variables) {
+                    const refsItem = response.variables.find(v => v.key === "references");
+                    if (refsItem) {
+                        let refs = JSON.parse(refsItem.value);
+                        refs = refs.map(r => `<div class="reference">[<a href="${r.Source}" target="_blank">${r.Number}</a>] <a href="${r.Source}" target="_blank">${r.LinkLabel}</a></div>`);
+
+                        if (refs.length > 0) {
+                            refs.splice(0, 0, "<br/>");
+                            references = refs.join("\r\n");
+                        }
+                    }
+                }
+                const html = `
+                    <li class="clearfix">
+                        <div class="message-data">
+                            <span class="message-user">Ida</span>
+                            <span class="message-data-time">${new Date(msg.timestamp).toLocaleString()}</span>
+                        </div>
+                        <div class="message other-message">
+                            ${mdToHtml(msg.content)}
+                            ${references}
+                        </div>
+                    </li>`;
+
+                const list = document.getElementById("chatHistoryList");
+                list.insertAdjacentHTML("beforeend", html);
+                scrollToBottom();
+            }
+
+            function submitChatRequest() {
+                const userInput = $("#userInput")[0];
+                const userInputText = userInput.value;        
+                if (!userInputText) {
+                    return;
+                }
+
+                $("#loadingStatus").css("display", "flex");
+                $(".chat-footer").css("height", "120px");
+                $(".chat-history").css("height", "calc(100% - 180px)")
+
+                const userMessage = {
+                    timestamp: new Date().toISOString(),
+                    userName: "Me",
+                    content: userInputText
+                };
+                appendUserMessage(userMessage);
+                userInput.value = "";
+
+                scrollToBottom();
+
+                var parameters = {};
+                parameters.ChatInput = JSON.stringify(chatState);
+
+                var req = new XMLHttpRequest();
+                req.open("POST", xrm.Utility.getGlobalContext().getClientUrl() + "/api/data/v9.2/new_ChatWithIda", true);
+                req.setRequestHeader("OData-MaxVersion", "4.0");
+                req.setRequestHeader("OData-Version", "4.0");
+                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                req.setRequestHeader("Accept", "application/json");
+                req.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        req.onreadystatechange = null;
+                        if (this.status >= 200 && this.status <= 204) {
+                            var result = JSON.parse(this.response);
+                            // Return Type: mscrm.new_ChatWithIdaResponse
+                            // Output Parameters
+                            var chatOutput = result["ChatOutput"];
+                            appendIdaResponse(JSON.parse(chatOutput));
+                        } else {
+                            console.log(`chatWithIda error: ${this.responseText}`);
+                        }
+
+                        $("#loadingStatus").css("display", "none");
+                        $(".chat-footer").css("height", "60px");
+                        $(".chat-history").css("height", "calc(100% - 120px)");
+                    }
+                };
+                req.send(JSON.stringify(parameters));
+            }
+
+            $(document).ready(function () {
+                const userInput = $("#userInput")[0];
+                userInput.addEventListener("keyup", evt => {
+                    // Submit chat request on Enter key
+                    if (evt.key === "Enter") {
+                        evt.preventDefault();
+                        submitChatRequest();
+                    }
+                });
+
+                appendIdaResponse({
+                    value: "Hello, I am Ida, how can I help?"
+                });
+            });
+        </script>
+
+        <div class="card chat-app">
+            <div class="chat">
+
+                <div class="chat-header clearfix">
+                    <div class="row" style="margin-top: 6px;">
+                        <div class="col-lg-6">
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                <img src="https://cogswellsprockets.crm3.dynamics.com/WebResources/new_onsightNowIdaIcon.svg?preview=1" alt="avatar">
+                            </a>
+                            <div class="chat-about">
+                                <h6 class="m-b-0">Ida</h6>
+                                <span>Your industrial digital assistant</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-history">
+                    <ul id="chatHistoryList" class="m-b-0">
+                    </ul>
+                </div>
+
+                <div class="chat-footer clearfix">
+
+                    <div id="loadingStatus" style="display: none; padding: 8px;">
+                        <img src="https://cogswellsprockets.crm3.dynamics.com/WebResources/new_onsightNowIdaIcon.svg?preview=1" style="height: 40px; margin-right: 20px;" />
+                        <div class="infinity-loader" style="justify-items: start; --infinity-loader-width: 20px; --infinity-loader-height: 20px; --infinity-loader-progress-width: 2px; --infinity-loader-position: relative; --infinity-loader-top: 18px; --infinity-loader-left: 20px">
+                            <div class="bg">
+                                <div class="left-bg"></div>
+                                <div class="right-bg"></div>
+                            </div>
+                            <div class="fg">
+                                <div class="top-left-rect">
+                                    <div></div>
+                                </div>
+                                <div class="bottom-right-rect">
+                                    <div></div>
+                                </div>
+                                <div class="top-right-rect">
+                                    <div></div>
+                                </div>
+                                <div class="bottom-left-rect">
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-0">
+                        <input id="userInput" type="text" class="form-control" placeholder="Ask questions & make requests...">
+                        <div class="input-group-append">
+                            <span class="input-group-text send-button" onclick="submitChatRequest(this);">
+                                <i class="fa fa-send"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

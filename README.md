@@ -2,7 +2,7 @@
 
 ## Overview
 
-This solution provides basic integration between Onsight NOW and Dynamics 365. It is designed to be a reference implementation and to serve as the basis for more complex integrations that an Onsight NOW customer may require.
+This solution provides basic integration between Onsight NOW and Dynamics 365 Field Service. It is designed to be a reference implementation and to serve as the basis for more complex integrations that an Onsight NOW customer may require.
 
 This integration adds two buttons to the WorkOrder's "MainTab" user interface. These buttons allow the D365 user to initiate an "instant meeting" with either the Field Tech worker assigned to the WorkOrder, or with the Subject Matter Expert assigned to the WorkOrder:
 
@@ -33,9 +33,10 @@ Once the solution has been installed into your D365 tenant, two environment vari
 
 > Note that these values are provided, by default, as type _Text_. Alternatively, you may change these variables to type _Secret_, which stores the values in an Azure Key Vault. The existing variables would need to be deleted and then re-added (reusing the same names) using the _Secret_ type. For more information on using _Secret_ environment variables, please [refer to the D365 documentation](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/environmentvariables-azure-key-vault-secrets).
 
-Additionally, two other environment variables may be **optionally* configured. If these two are not modified, the standard values will be used:
+Additionally, three other environment variables may be **optionally** configured. If these two are not modified, the standard values will be used:
 - **new_OnsightNowTokenEndpoint**: the Onsight NOW API Token URL.
 - **new_OnsightNowMeetingsEndpoint**: the Onsight NOW Meetings API URL.
+- **new_OnsightNowIdaEndpoint**: the Onsight NOW Ida Chat API URL.
 
 ## Components
 

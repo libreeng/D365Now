@@ -1,6 +1,7 @@
 ﻿using OnsightNow.DataversePlugin.Models;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace OnsightNow.DataversePlugin
 {
@@ -9,7 +10,7 @@ namespace OnsightNow.DataversePlugin
         /// <summary>
         /// OAuth scopes required to use the Onsight NOW Meetings API.
         /// </summary>
-        private const string ApiScopes = "meeting_api collection_api";
+        private const string ApiScopes = "meeting_api collection_api ida_api";
 
         private readonly string _clientId;
         private readonly string _clientSecret;
@@ -30,6 +31,11 @@ namespace OnsightNow.DataversePlugin
         /// The Onsight NOW Meetings API endpoint. This can be overridden at runtime by the now_OnsightNowMeetingsEndpoint environment variable.
         /// </summary>
         public string MeetingsEndpoint { get; set; } = "https://api.onsightnow.com/meetings";
+
+        /// <summary>
+        /// The Onsight NOW Ida Chat API endpoint. This can be overridden at runtime by the now_OnsightNowIdaEndpoint environment variable.
+        /// </summary>
+        public string IdaChatEndpoint { get; set; } = "https://api.onsightnow.com/ida";
 
         /// <summary>
         /// Creates an Onsight NOW Meeting.
@@ -55,6 +61,22 @@ namespace OnsightNow.DataversePlugin
                 }
             }
         }
+
+        public IdaChatResponse ChatWithIda(IdaChatRequest chatRequest)
+        {
+            var accessToken = GetAccessToken();
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
+                using (var response = client.PostAsJson(IdaChatEndpoint, chatRequest))
+                {
+                    response.EnsureSuccessStatusCode();
+                    return response.Content.ReadAs<IdaChatResponse>();
+                }
+            }
+        }
+
 
         /// <summary>
         /// Helper which gets an Onsight Now API Token using the client_credentials flow.

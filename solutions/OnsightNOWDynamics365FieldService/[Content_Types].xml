@@ -3,8 +3,13 @@
     <Default Extension="xml" ContentType="application/octet-stream" />
     <Default Extension="xaml" ContentType="application/octet-stream" />
     <Default Extension="nupkg" ContentType="application/octet-stream" />
-    <Override PartName="/WebResources/new_OnsightNowApiB4063D5E-9601-EF11-9F89-002248B31AA4"
-        ContentType="application/octet-stream" />
+    <Default Extension="json" ContentType="application/octet-stream" />
     <Override PartName="/WebResources/new_onsightIcon3B2EFE42-E975-EB11-A812-000D3AF3FF5E"
+        ContentType="application/octet-stream" />
+    <Override PartName="/WebResources/newOnsightNowIdaChat4FEECDE3-527C-4208-B380-15AF4B24183B"
+        ContentType="application/octet-stream" />
+    <Override PartName="/WebResources/new_onsightNowIdaIconsvgE7D8ECCE-5A44-EF11-A316-002248B0FFC5"
+        ContentType="application/octet-stream" />
+    <Override PartName="/WebResources/new_OnsightNowApiB4063D5E-9601-EF11-9F89-002248B31AA4"
         ContentType="application/octet-stream" />
 </Types>

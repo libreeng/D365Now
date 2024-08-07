@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
 
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v2
@@ -49,6 +49,7 @@ jobs:
       run: |
           Get-ChildItem -Filter ".\staging\WebResources\*.js" | Rename-Item -NewName {$_.name -replace ".js","" }
           Get-ChildItem -Filter ".\staging\WebResources\*.svg" | Rename-Item -NewName {$_.name -replace ".svg","" }
+          Get-ChildItem -Filter ".\staging\WebResources\*.html" | Rename-Item -NewName {$_.name -replace ".html","" }
 
     - uses: actions/upload-artifact@v4
       with:

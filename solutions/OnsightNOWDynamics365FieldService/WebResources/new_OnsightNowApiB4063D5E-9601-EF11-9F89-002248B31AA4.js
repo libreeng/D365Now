@@ -112,7 +112,7 @@ async function retrieveRecordAsync(mappings, entityId) {
 
     const entityLogicalName = mapping.entityLogicalName;
 
-    let result = await Xrm.WebApi.retrieveRecord(entityLogicalName, entityId, options);
+    let result = await xrm.WebApi.retrieveRecord(entityLogicalName, entityId, options);
     let resultValue = mapResultToValue(result, mapping);
 
     if (mappings.length === 1) {
@@ -191,7 +191,7 @@ function execScheduleMeetingAction(participantEmails) {
     parameters.ParticipantEmails = participantEmails;
 
     var req = new XMLHttpRequest();
-    req.open("POST", Xrm.Utility.getGlobalContext().getClientUrl() + "/api/data/v9.2/new_ScheduleNOWMeeting", true);
+    req.open("POST", xrm.Utility.getGlobalContext().getClientUrl() + "/api/data/v9.2/new_ScheduleNOWMeeting", true);
     req.setRequestHeader("OData-MaxVersion", "4.0");
     req.setRequestHeader("OData-Version", "4.0");
     req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -226,6 +226,7 @@ async function onClick(primaryControl, callTargetType) {
 
     // Get the entity in context (could be a selected entity within a subgrid, for example)
     const contextEntity = getTriggeringEntity(primaryControl);
+ console.log(`contextEntity: ${contextEntity}`);
     if (!contextEntity) {
         // Skipping launch; no entity in context
         return;
@@ -233,7 +234,9 @@ async function onClick(primaryControl, callTargetType) {
     
     // Assume that the current D365 user is the person initiating the Onsight NOW meeting
     const callerEmail = await getEmailAddressAsync("systemuser", xrm.Page.context.getUserId());
+    console.log(`callerEmail=${callerEmail}`);
     const calleeEmail = await getEmailAddressAsync(contextEntity._entityType, contextEntity._entityId.guid, callTargetType)
+    console.log(`calleeEmail=${calleeEmail}`);
 
     const participantEmails = `${callerEmail},${calleeEmail}`;
     console.log(`Scheduling NOW meeting with participants ${participantEmails}`);
